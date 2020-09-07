@@ -4,14 +4,34 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Znaleziska: undefined;
+  Wpisy: undefined;
+  MojWykop: undefined;
+  Inbox: undefined;
+  Profil: undefined;
 };
 
-export type TabOneParamList = {
+export type TabZnaleziskaParamList = {
   TabOneScreen: undefined;
+  SearchScreen: undefined;
 };
 
-export type TabTwoParamList = {
+export type TabWpisyTabParamList = {
   TabTwoScreen: undefined;
+};
+
+export type TabMojWykopParamList = {
+  TabTwoScreen: undefined;
+};
+
+export type TabInboxParamList = {
+  TabTwoScreen: undefined;
+};
+
+export type TabProfilParamList = {
+  TabTwoScreen: undefined;
+};
+
+export type SearchStackParamList = {
+  SearchScreen: undefined;
 };
