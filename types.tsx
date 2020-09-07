@@ -13,6 +13,7 @@ export type BottomTabParamList = {
 
 export type TabZnaleziskaParamList = {
   TabOneScreen: undefined;
+  SearchScreen: undefined;
 };
 
 export type TabWpisyTabParamList = {
@@ -29,4 +30,8 @@ export type TabInboxParamList = {
 
 export type TabProfilParamList = {
   TabTwoScreen: undefined;
+};
+
+export type SearchStackParamList = {
+  SearchScreen: undefined;
 };
