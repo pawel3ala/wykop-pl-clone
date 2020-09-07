@@ -12,8 +12,10 @@ export type BottomTabParamList = {
 };
 
 export type TabZnaleziskaParamList = {
-  TabOneScreen: undefined;
+  ZnaleziskaHomeScreen: undefined;
+  ZnaleziskoScreen: undefined;
   SearchScreen: undefined;
+  DodajZnaleziskoScreen: undefined
 };
 
 export type TabWpisyTabParamList = {
