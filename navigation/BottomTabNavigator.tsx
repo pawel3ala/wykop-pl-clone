@@ -5,16 +5,87 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabTwoScreen from '../screens/TabTwoScreen';
 import {
   BottomTabParamList,
-  TabWpisyTabParamList,
-  TabMojWykopParamList,
-  TabInboxParamList,
-  TabProfilParamList
 } from '../types';
 
-import { ZnaleziskaStackNavigator } from './ZnaleziskaStackNavigator'
+import { generateScreenOptions } from './utilities'
+import Znaleziska from '../screens/Znaleziska'
+import Znalezisko from '../screens/Znalezisko'
+import SearchScreen from '../screens/SearchScreen'
+import Wpisy from '../screens/Wpisy'
+import DodajZnaleziskoScreen from '../screens/DodajZnaleziskoScreen'
+import InboxScreen from '../screens/InboxScreen'
+import MojWykopScreen from '../screens/MojWykopScreen'
+import ProfilScreen from '../screens/ProfilScreen'
+
+const getInitialRouteNameFromTabName = (tabName: string) => {
+
+  switch (tabName) {
+    case 'ZNALEZISKA':
+      return "ZnaleziskaHomeScreen"
+    case 'WPISY':
+      return "WpisyScreen"
+    case 'MOJ_WYKOP':
+      return "MojWykopScreen"
+    case 'INBOX':
+      return "InboxScreen"
+    case 'PROFIL':
+      return "ProfilScreen"
+  }
+}
+const wykopStackNavigatorFactory = (tabName: string) => {
+
+  const StackNavigator = createStackNavigator()
+  const initialScreen = getInitialRouteNameFromTabName(tabName)
+
+  return (
+    <StackNavigator.Navigator
+      initialRouteName={initialScreen}
+      screenOptions={(props) => generateScreenOptions(props)}
+    >
+      <StackNavigator.Screen
+        name="ZnaleziskaHomeScreen"
+        component={Znaleziska}
+      />
+      <StackNavigator.Screen
+        name="WpisyScreen"
+        component={Wpisy}
+      />
+      <StackNavigator.Screen
+        name="ZnaleziskoScreen"
+        component={Znalezisko}
+      />
+      <StackNavigator.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+      />
+      <StackNavigator.Screen
+        name="DodajZnaleziskoScreen"
+        component={DodajZnaleziskoScreen}
+      />
+      <StackNavigator.Screen
+        name="InboxScreen"
+        component={InboxScreen}
+      />
+      <StackNavigator.Screen
+        name="MojWykopScreen"
+        component={MojWykopScreen}
+      />
+      <StackNavigator.Screen
+        name="ProfilScreen"
+        component={ProfilScreen}
+      />
+    </StackNavigator.Navigator>
+  );
+}
+
+// SHOULD I USE ANONYMOUS FUNCTIONS HERE?
+const ZnaleziskaStackNavigator = () => wykopStackNavigatorFactory('ZNALEZISKA');
+const WpisyStackNavigator = () => wykopStackNavigatorFactory('WPISY');
+const MojWykopStackNavigator = () => wykopStackNavigatorFactory('MOJ_WYKOP');
+const InboxStackNavigator = () => wykopStackNavigatorFactory('INBOX');
+const ProfilStackNavigator = () => wykopStackNavigatorFactory('PROFIL');
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -23,7 +94,6 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Znaleziska"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Znaleziska"
@@ -34,28 +104,28 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Wpisy"
-        component={WpisyNavigator}
+        component={WpisyStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="MojWykop"
-        component={MojWykopNavigator}
+        component={MojWykopStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Inbox"
-        component={InboxNavigator}
+        component={InboxStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Profil"
-        component={ProfilNavigator}
+        component={ProfilStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -68,60 +138,4 @@ export default function BottomTabNavigator() {
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
-
-const WpisyStack = createStackNavigator<TabWpisyTabParamList>();
-
-function WpisyNavigator() {
-  return (
-    <WpisyStack.Navigator>
-      <WpisyStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-    </WpisyStack.Navigator>
-  );
-}
-
-const MojWykopStack = createStackNavigator<TabMojWykopParamList>();
-
-function MojWykopNavigator() {
-  return (
-    <MojWykopStack.Navigator>
-      <MojWykopStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-    </MojWykopStack.Navigator>
-  );
-}
-
-const InboxStack = createStackNavigator<TabInboxParamList>();
-
-function InboxNavigator() {
-  return (
-    <InboxStack.Navigator>
-      <InboxStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-    </InboxStack.Navigator>
-  );
-}
-
-const ProfilStack = createStackNavigator<TabProfilParamList>();
-
-function ProfilNavigator() {
-  return (
-    <ProfilStack.Navigator>
-      <ProfilStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-    </ProfilStack.Navigator>
-  );
 }
