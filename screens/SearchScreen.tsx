@@ -3,16 +3,16 @@ import { View, Text } from 'react-native'
 import { Button } from 'react-native'
 
 
-const Search = ({navigation}) => {
+const SearchScreen = ({ navigation }) => {
 
-    const {navigate} = navigation
+    const { navigate } = navigation
 
     return (
         <View>
             <Text>Szukaj</Text>
-            <Button  title="Znalezisko" onPress={() => navigate('ZnaleziskoScreen')} />
+            <Button title="Znalezisko" onPress={() => navigate('ZnaleziskoScreen')} />
         </View>
     )
 }
 
-export default Search
+export default SearchScreen

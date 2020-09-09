@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Znalezisko from '../components/Znalezisko'
 import { useNavigation } from '@react-navigation/native';
 
 const Znaleziska = (props) => {
