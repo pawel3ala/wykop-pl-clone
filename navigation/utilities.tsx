@@ -7,19 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 import * as React from 'react';
 import { View, Text } from 'react-native'
-
-
-function FindIcon(props) {
-    const { navigate } = useNavigation();
-
-    return <Entypo
-        name="magnifying-glass"
-        size={24}
-        color="black"
-        {...props}
-        onPress={() => navigate('SearchScreen')}
-    />
-}
+import FindIcon from '../components/FindIcon'
 
 function HeaderTitle(props) {
     const { routeName } = props

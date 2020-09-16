@@ -26,7 +26,7 @@ const getInitialRouteNameFromTabName = (tabName: string) => {
     }
   }
 
-export default const wykopStackNavigatorFactory = (tabName: string) => {
+export default function wykopStackNavigatorFactory (tabName: string) {
 
     const StackNavigator = createStackNavigator()
     const initialScreen = getInitialRouteNameFromTabName(tabName)
