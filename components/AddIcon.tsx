@@ -1,6 +1,6 @@
 import React from 'react'
 import { Entypo } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 
 export default function Addcon(props: object) {
     const { navigate } = useNavigation();

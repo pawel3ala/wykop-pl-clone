@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Text, Button, Linking } from 'react-native'
-import * as WebBrowser from 'expo-web-browser';
-
+import { Button, Linking } from 'react-native'
+import { Text, View } from '../components/Themed';
 
 const Znalezisko = (props) => {
 

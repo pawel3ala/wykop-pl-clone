@@ -1,4 +1,3 @@
-
 import AddToFavourites from '../components/AddToFavouritesIcon';
 import RateIcon from '../components/RateIcon'
 import FlagIcon from '../components/FlagIcon'
