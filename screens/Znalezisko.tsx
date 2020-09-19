@@ -1,17 +1,17 @@
 import React from 'react'
-import { Button, Linking } from 'react-native'
+import { Button, Linking, StyleSheet } from 'react-native'
 import { Text, View } from '../components/Themed';
 
-const Znalezisko = (props) => {
+const Znalezisko = (props: object) => {
 
-const handleButtonPress = (props) => {
+const handleButtonPress = (props: object) => {
     // WebBrowser.openBrowserAsync('https://expo.io');
     Linking.openURL('https://google.com');
 }
 
     return (
-        <View>
-            <Text>To jest znalezisko</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>To jest znalezisko</Text>
             <Button
           title="Open URL with Expo.WebBrowser"
           onPress={handleButtonPress}
@@ -21,3 +21,15 @@ const handleButtonPress = (props) => {
 }
 
 export default Znalezisko
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    }
+});
