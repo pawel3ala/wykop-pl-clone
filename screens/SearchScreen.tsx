@@ -1,18 +1,28 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from '../components/Themed';
 import { Button } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-
-const SearchScreen = ({ navigation }) => {
+export default  function SearchScreen ({ navigation }) {
 
     const { navigate } = navigation
 
     return (
-        <View>
-            <Text>Szukaj</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Szukaj</Text>
             <Button title="Znalezisko" onPress={() => navigate('ZnaleziskoScreen')} />
         </View>
     )
 }
 
-export default SearchScreen
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    }
+});

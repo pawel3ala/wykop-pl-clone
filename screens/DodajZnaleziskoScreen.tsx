@@ -1,12 +1,23 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from '../components/Themed';
+import { StyleSheet } from 'react-native'
 
-const DodajZnalezisko = () => {
+export default function DodajZnalezisko () {
     return (
-        <View>
-            <Text>DODAJ ZNALEZISKO</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>DODAJ ZNALEZISKO</Text>
         </View>
     )
 }
 
-export default DodajZnalezisko
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    }
+});

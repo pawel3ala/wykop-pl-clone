@@ -26,7 +26,7 @@ const getInitialRouteNameFromTabName = (tabName: string) => {
     }
   }
 
-export default const wykopStackNavigatorFactory = (tabName: string) => {
+export default function wykopStackNavigatorFactory (tabName: string, color: string) {
 
     const StackNavigator = createStackNavigator()
     const initialScreen = getInitialRouteNameFromTabName(tabName)
@@ -34,7 +34,7 @@ export default const wykopStackNavigatorFactory = (tabName: string) => {
     return (
       <StackNavigator.Navigator
         initialRouteName={initialScreen}
-        screenOptions={(props) => generateScreenOptions(props)}
+        screenOptions={(props) => generateScreenOptions(props, color)}
       >
         <StackNavigator.Screen
           name="ZnaleziskaHomeScreen"

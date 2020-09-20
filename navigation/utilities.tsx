@@ -1,70 +1,47 @@
-
 import AddToFavourites from '../components/AddToFavouritesIcon';
 import RateIcon from '../components/RateIcon'
 import FlagIcon from '../components/FlagIcon'
 import ShareIcon from '../components/ShareIcon'
-import { useNavigation } from '@react-navigation/native';
-import { Ionicons, Entypo } from '@expo/vector-icons';
 import * as React from 'react';
 import { View, Text } from 'react-native'
-
-
-function FindIcon(props) {
-    const { navigate } = useNavigation();
-
-    return <Entypo
-        name="magnifying-glass"
-        size={24}
-        color="black"
-        {...props}
-        onPress={() => navigate('SearchScreen')}
-    />
-}
+import FindIcon from '../components/FindIcon'
+import AddIcon from '../components/AddIcon'
 
 function HeaderTitle(props) {
     const { routeName } = props
     return <Text>RouteName: {routeName}</Text>
 }
 
-function AddButton(props) {
-    const { navigate } = useNavigation();
-
-    return <Entypo
-        name="plus"
-        size={24}
-        color="black"
-
-        {...props}
-        onPress={() => handleAddButton(props, navigate)}
-    />
-}
-
-function handleAddButton(props, navigate) {
-    const { routeName } = props
-
-    if (routeName === 'ZnaleziskaHomeScreen') {
-        navigate('DodajZnaleziskoScreen')
-    }
-}
-export function generateScreenOptions(props) {
+export function generateScreenOptions(props, color:string) {
     const { route: { name: routeName } } = props
     switch (routeName) {
         case 'ZnaleziskaHomeScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerLeft: (props) => <FindIcon {...props} routeName={routeName} />,
                 headerTitle: (props) => <HeaderTitle {...props} routeName={routeName} />,
-                headerRight: (props) => <AddButton {...props} routeName={routeName} />
+                headerRight: (props) => <AddIcon {...props} routeName={routeName} />
+            }
+        case 'WpisyScreen':
+            return {
+                headerShown: true,
+                headerStyle: {backgroundColor: color},
+                headerLeft: (props) => <FindIcon {...props} routeName={routeName} />,
+                headerTitle: (props) => <HeaderTitle {...props} routeName={routeName} />,
+                headerRight: (props) => <AddIcon {...props} routeName={routeName} />    
             }
         case 'SearchScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerBackTitle: ' ',
                 headerTitle: 'Szukaj'
             }
         case 'ZnaleziskoScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerBackTitle: ' ',
                 headerRight: (props) => {
                     return (
