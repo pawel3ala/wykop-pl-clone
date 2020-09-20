@@ -7,13 +7,32 @@ import useColorScheme from '../hooks/useColorScheme';
 import {
   BottomTabParamList,
 } from '../types';
+import { useThemeColor } from '../components/Themed';
 
 // SHOULD I USE ANONYMOUS FUNCTIONS HERE?
-const ZnaleziskaStackNavigator = () => wykopStackNavigatorFactory('ZNALEZISKA');
-const WpisyStackNavigator = () => wykopStackNavigatorFactory('WPISY');
-const MojWykopStackNavigator = () => wykopStackNavigatorFactory('MOJ_WYKOP');
-const InboxStackNavigator = () => wykopStackNavigatorFactory('INBOX');
-const ProfilStackNavigator = () => wykopStackNavigatorFactory('PROFIL');
+const ZnaleziskaStackNavigator = (props) => {
+  const color = useThemeColor(props, 'topNavBackgroundColor');
+  return wykopStackNavigatorFactory('ZNALEZISKA', color)
+};
+const WpisyStackNavigator = (props) => {
+  const color = useThemeColor(props, 'topNavBackgroundColor');
+  return wykopStackNavigatorFactory('WPISY', color)
+};
+const MojWykopStackNavigator = (props) => {
+  const color = useThemeColor(props, 'topNavBackgroundColor');
+
+  return wykopStackNavigatorFactory('MOJ_WYKOP', color)
+}
+const InboxStackNavigator = (props) => {
+  const color = useThemeColor(props, 'topNavBackgroundColor');
+
+  return wykopStackNavigatorFactory('INBOX', color)
+}
+const ProfilStackNavigator = (props) => {
+  const color = useThemeColor(props, 'topNavBackgroundColor');
+
+  return wykopStackNavigatorFactory('PROFIL', color)
+}
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

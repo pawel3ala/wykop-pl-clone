@@ -12,25 +12,36 @@ function HeaderTitle(props) {
     return <Text>RouteName: {routeName}</Text>
 }
 
-export function generateScreenOptions(props) {
+export function generateScreenOptions(props, color:string) {
     const { route: { name: routeName } } = props
     switch (routeName) {
         case 'ZnaleziskaHomeScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerLeft: (props) => <FindIcon {...props} routeName={routeName} />,
                 headerTitle: (props) => <HeaderTitle {...props} routeName={routeName} />,
                 headerRight: (props) => <AddIcon {...props} routeName={routeName} />
             }
+        case 'WpisyScreen':
+            return {
+                headerShown: true,
+                headerStyle: {backgroundColor: color},
+                headerLeft: (props) => <FindIcon {...props} routeName={routeName} />,
+                headerTitle: (props) => <HeaderTitle {...props} routeName={routeName} />,
+                headerRight: (props) => <AddIcon {...props} routeName={routeName} />    
+            }
         case 'SearchScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerBackTitle: ' ',
                 headerTitle: 'Szukaj'
             }
         case 'ZnaleziskoScreen':
             return {
                 headerShown: true,
+                headerStyle: {backgroundColor: color},
                 headerBackTitle: ' ',
                 headerRight: (props) => {
                     return (
