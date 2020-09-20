@@ -9,7 +9,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
     topNavIconColor: '#000',
-    topNavBackgroundColor: '#fff'
+    topNavBackgroundColor: '#fff',
+    bottomNavBackgroundColor: '#fff'
   },
   light: {
     text: '#fff',
@@ -18,6 +19,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     topNavIconColor: '#fff',
-    topNavBackgroundColor: '#000'
+    topNavBackgroundColor: '#022',
+    bottomNavBackgroundColor: '#000'
   },
 };

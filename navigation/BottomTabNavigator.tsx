@@ -41,7 +41,11 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+        activeBackgroundColor: Colors[colorScheme].bottomNavBackgroundColor,
+        inactiveBackgroundColor: Colors[colorScheme].bottomNavBackgroundColor
+      }}>
       <BottomTab.Screen
         name="Znaleziska"
         component={ZnaleziskaStackNavigator}
