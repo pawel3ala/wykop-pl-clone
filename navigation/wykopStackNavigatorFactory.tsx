@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { generateScreenOptions } from './utilities'
-import Znaleziska from '../screens/Znaleziska'
 import Znalezisko from '../screens/Znalezisko'
 import SearchScreen from '../screens/SearchScreen'
-import Wpisy from '../screens/Wpisy'
 import DodajZnaleziskoScreen from '../screens/DodajZnaleziskoScreen'
-import InboxScreen from '../screens/InboxScreen'
-import MojWykopScreen from '../screens/MojWykopScreen'
 import ProfilScreen from '../screens/ProfilScreen'
 import ZnaleziskaTobTabNavigator from '../navigation/ZnaleziskaTopTabNavigator'
 import WpisyTopTabNavigator from '../navigation/WpisyTopTabNavigator'
 import MojWykopTopTabNavigator from '../navigation/MojWykopTopTabNavigator'
 import InboxTopTabNavigator from '../navigation/InboxTopTabNavigator'
+import ProfilTopTabNavigator from '../navigation/ProfilTopTabNavigator'
 
 const getInitialRouteNameFromTabName = (tabName: string) => {
 
@@ -70,7 +67,7 @@ export default function wykopStackNavigatorFactory (tabName: string, color: stri
         />
         <StackNavigator.Screen
           name="ProfilScreen"
-          component={ProfilScreen}
+          component={ProfilTopTabNavigator}
         />
       </StackNavigator.Navigator>
     );
