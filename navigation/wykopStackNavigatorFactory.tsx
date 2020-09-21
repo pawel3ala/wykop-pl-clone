@@ -10,6 +10,7 @@ import InboxScreen from '../screens/InboxScreen'
 import MojWykopScreen from '../screens/MojWykopScreen'
 import ProfilScreen from '../screens/ProfilScreen'
 import ZnaleziskaTobTabNavigator from '../navigation/ZnaleziskaTopTabNavigator'
+import WpisyTopTabNavigator from '../navigation/WpisyTopTabNavigator'
 
 const getInitialRouteNameFromTabName = (tabName: string) => {
 
@@ -43,7 +44,7 @@ export default function wykopStackNavigatorFactory (tabName: string, color: stri
         />
         <StackNavigator.Screen
           name="WpisyScreen"
-          component={Wpisy}
+          component={WpisyTopTabNavigator}
         />
         <StackNavigator.Screen
           name="ZnaleziskoScreen"
