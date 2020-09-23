@@ -1,16 +1,30 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Text, View } from '../components/Themed';
+import { links } from '../constants/FakeData'
+import Link from '../components/Link'
+
 
 const Znaleziska = (props) => {
-    const { navigate } = useNavigation();
+
+    const renderItem = ({ item }) => {
+        return (
+            <Link
+                title={item.title}
+                preview={item.preview}
+                vote_count={item.vote_count}
+                comments_count={item.comments_count}
+            />
+        )
+    }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>ZNALEZISKA</Text>
-            <Text onPress={()=> navigate('ZnaleziskoScreen')}>Przykladowe znalezisko</Text>
-        </View>
+            <FlatList
+                data={links}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+            />
     )
 }
 
@@ -21,10 +35,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
     }
 });
 
