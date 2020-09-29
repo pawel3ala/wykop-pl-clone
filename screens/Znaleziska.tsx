@@ -1,8 +1,6 @@
 import React from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList,TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { Text, View } from '../components/Themed';
-import { links } from '../constants/FakeData'
 import Link from '../components/Link'
 import { useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -19,6 +17,8 @@ const Znaleziska = (props) => {
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
+    const navigation = useNavigation();
+
     
     const fetchData = (page) => {
 
@@ -44,13 +44,17 @@ const Znaleziska = (props) => {
     }, [page])
 
     const renderItem = ({ item }) => {
+        const {title, preview, vote_count, comments_count, id} = item
+
         return (
-            <Link
-                title={item.title}
-                preview={item.preview}
-                vote_count={item.vote_count}
-                comments_count={item.comments_count}
-            />
+            <TouchableHighlight onPress={()=> navigation.navigate('ZnaleziskoScreen', {id: id})}>
+                <Link
+                    title={title}
+                    preview={preview}
+                    vote_count={vote_count}
+                    comments_count={comments_count}
+                />
+            </TouchableHighlight>
         )
     }
 
