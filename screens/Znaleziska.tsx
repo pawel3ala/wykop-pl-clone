@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, FlatList,TouchableHighlight } from 'react-native'
+import { StyleSheet, FlatList, TouchableHighlight } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import Link from '../components/Link'
 import { useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ const Znaleziska = (props) => {
     const [page, setPage] = useState(1)
     const navigation = useNavigation();
 
-    
+
     const fetchData = (page) => {
 
         const url = `https://a2.wykop.pl/Links/Promoted/page/${page}/appkey/XVnNJ8CwBc/`
@@ -44,29 +44,30 @@ const Znaleziska = (props) => {
     }, [page])
 
     const renderItem = ({ item }) => {
-        const {title, preview, vote_count, comments_count, id} = item
-
-        return (
-            <TouchableHighlight onPress={()=> navigation.navigate('ZnaleziskoScreen', {id: id})}>
-                <Link
-                    title={title}
-                    preview={preview}
-                    vote_count={vote_count}
-                    comments_count={comments_count}
-                />
-            </TouchableHighlight>
-        )
-    }
+        const { title, preview, vote_count, comments_count, id, related_count, bury_count, tags } = item
+        const objToPass = { title, preview, vote_count, comments_count, id, related_count, bury_count, tags }
 
     return (
-        <FlatList
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={item => item.title}
-            onEndReachedThreshold={0.9}
-            onEndReached={loadMoreData}
-        />
+        <TouchableHighlight onPress={() => navigation.navigate('ZnaleziskoScreen', objToPass)}>
+            <Link
+                title={title}
+                preview={preview}
+                vote_count={vote_count}
+                comments_count={comments_count}
+            />
+        </TouchableHighlight>
     )
+}
+
+return (
+    <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.title}
+        onEndReachedThreshold={0.9}
+        onEndReached={loadMoreData}
+    />
+)
 }
 
 export default Znaleziska
