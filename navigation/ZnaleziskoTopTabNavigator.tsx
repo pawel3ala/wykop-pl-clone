@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Znaleziska from '../screens/Znaleziska'
 import { Feather } from '@expo/vector-icons';
 import Placeholder from '../components/Placeholder'
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function ZnaleziskoTopTabNavigator(props) {
+type ZnaleziskoTopTabNavigatorProps = {
+    comments_count: number,
+    related_count: number,
+    tags: string,
+    vote_count: number
+    bury_count: number
+}
+
+export default function ZnaleziskoTopTabNavigator(props: ZnaleziskoTopTabNavigatorProps) {
 
     const {
         comments_count,
@@ -16,7 +23,10 @@ export default function ZnaleziskoTopTabNavigator(props) {
         bury_count
     } = props
 
-    const getHashtagsCount = tags.split("#").length - 1
+    const getHashtagsCount = () => {
+        if (!tags) return 0
+        else return tags.split("#").length - 1
+    }
 
     return (
         <Tab.Navigator tabBarOptions={{ showIcon: true, tabStyle: { flexDirection: 'row' } }}>
@@ -38,7 +48,7 @@ export default function ZnaleziskoTopTabNavigator(props) {
             />
             <Tab.Screen
                 options={{
-                    title: getHashtagsCount.toString(),
+                    title: getHashtagsCount().toString(),
                     tabBarIcon: () => <Feather name="flag" size={24} />
                 }}
                 name="hashtags"

@@ -35,6 +35,7 @@ const Znaleziska = () => {
             .then((response) => {
                 const { data: { data: fetchedData } } = response
                 // Extracting the minimum amount of data to be held in component
+                // console.log(fetchedData)
                 const dataToBeSaved = fetchedData.map(item => (({ id, title, preview, comments_count, source_url, vote_count }) => ({ id, title, preview, comments_count, source_url, vote_count}))(item))
                 setData([...data, ...dataToBeSaved])
             })

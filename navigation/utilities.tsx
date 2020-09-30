@@ -18,6 +18,7 @@ export function generateScreenOptions(props, color: string) {
         case 'ZnaleziskaHomeScreen':
             return {
                 headerShown: true,
+                title: "ppp",
                 headerStyle: { backgroundColor: color },
                 headerLeft: (props) => <FindIcon {...props} routeName={routeName} />,
                 headerTitle: (props) => <HeaderTitle {...props} routeName={routeName} />,
@@ -67,6 +68,7 @@ export function generateScreenOptions(props, color: string) {
                 headerStyle: { backgroundColor: color },
                 headerBackTitle: ' ',
                 headerRight: (props) => {
+                    console.log(props)
                     return (
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
                             <AddToFavourites {...props} />
