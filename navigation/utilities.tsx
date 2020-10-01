@@ -6,12 +6,7 @@ import * as React from 'react';
 import { View, Text } from 'react-native'
 import FindIcon from '../components/FindIcon'
 import AddIcon from '../components/AddIcon'
-import { useRoute } from '@react-navigation/native';
-
-function HeaderTitle() {
-    const route = useRoute();
-    return <Text>RouteName: {route.name}</Text>
-}
+import HeaderTitle from '../components/HeaderTitle'
 
 export function generateScreenOptions(props, color: string) {
 
@@ -20,7 +15,6 @@ export function generateScreenOptions(props, color: string) {
         case 'ZnaleziskaHomeScreen':
             return {
                 headerShown: true,
-                title: "ppp",
                 headerStyle: { backgroundColor: color },
                 headerLeft: () => <FindIcon />,
                 headerTitle: () => <HeaderTitle />,
