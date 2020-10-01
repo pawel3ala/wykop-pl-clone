@@ -5,6 +5,9 @@ import { RootStackParamList } from '../types';
 import * as WebBrowser from 'expo-web-browser';
 import { Button } from 'react-native';
 import * as Google from 'expo-google-app-auth'
+import { AsyncStorage } from 'react-native';
+import { Animated, Easing } from 'react-native';
+import Constants from 'expo-constants';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -12,14 +15,34 @@ export default function LoginScreen({
     navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
+    const spinValue = new Animated.Value(0)
+
+    Animated.loop(
+        Animated.timing(
+            spinValue,
+            {
+                toValue: 1,
+                duration: 5000,
+                easing: Easing.linear,
+                useNativeDriver: true 
+            }
+        )
+    ).start()
+
+    const spin = spinValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    })
+
     const handleGoogleLogin = async () => {
         try {
             const { type, accessToken, user } = await Google.logInAsync({
-                iosClientId: '767485748040-v9o2higdcg652bsg0a3n7ppo8ip64odn.apps.googleusercontent.com',
+                iosClientId: Constants.manifest.iosClientId,
                 scopes: ['profile', 'email']
             })
             if (type === 'success') {
-                //   await AsyncStorage.setItem('LOGGED_IN_USER', JSON.stringify(user))
+                await AsyncStorage.setItem('LOGGED_IN_USER', JSON.stringify(user))
+                await AsyncStorage.setItem('ACCESS_TOKEN', accessToken)
                 navigation.navigate('Root')
             } else {
                 alert("not authenticated")
@@ -31,9 +54,10 @@ export default function LoginScreen({
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>This is login screen</Text>
             <TouchableOpacity onPress={handleGoogleLogin} style={styles.link}>
-                <Text style={styles.linkText}>Logowanko via Google OAuth</Text>
+                <Animated.Image
+                    style={{ transform: [{ rotate: spin }], height: 50, width: 200, resizeMode: 'stretch' }}
+                    source={{ uri: "https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" }} />
             </TouchableOpacity>
         </View>
     );
@@ -54,9 +78,5 @@ const styles = StyleSheet.create({
     link: {
         marginTop: 15,
         paddingVertical: 15,
-    },
-    linkText: {
-        fontSize: 14,
-        color: '#2e78b7',
-    },
+    }
 });
