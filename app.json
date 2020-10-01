@@ -19,10 +19,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "iosClientId": "767485748040-v9o2higdcg652bsg0a3n7ppo8ip64odn.apps.googleusercontent.com"
   }
 }
