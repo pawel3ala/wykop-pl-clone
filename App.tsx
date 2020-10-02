@@ -1,17 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { Provider } from "react-redux";
-import { store } from "./store/configureStore";
-
+import configureStore from "./store/configureStore";
+import { PersistGate } from 'redux-persist/integration/react'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const { persistor, store } = configureStore()
 
   if (!isLoadingComplete) {
     return null;
@@ -19,8 +19,10 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <Provider store={store}>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
+          <PersistGate loading={null} persistor={persistor}>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </PersistGate>
         </Provider>
       </SafeAreaProvider>
     );
