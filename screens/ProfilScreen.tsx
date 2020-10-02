@@ -6,17 +6,22 @@ import { AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native';
 import Constants from 'expo-constants';
+import { useDispatch, useStore } from 'react-redux'
+import {clearUser} from '../store/reducers/currentUserReducer'
 
 export default function ProfilScreen() {
 
+    const store = useStore()
+    const dispatch = useDispatch()
     const navigation = useNavigation();
+
     const config = {
         iosClientId: Constants.manifest.iosClientId,
     }
 
     const handleLogOut = async () => {
-        const accessToken = await AsyncStorage.getItem('ACCESS_TOKEN');
-        await Google.logOutAsync({ accessToken, ...config })
+        await Google.logOutAsync({ accessToken: store.getState().currentUser.accessToken, ...config })
+        dispatch(clearUser())
         navigation.navigate("Login")
     }
 

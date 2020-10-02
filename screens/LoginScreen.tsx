@@ -8,6 +8,8 @@ import * as Google from 'expo-google-app-auth'
 import { AsyncStorage } from 'react-native';
 import { Animated, Easing } from 'react-native';
 import Constants from 'expo-constants';
+import { setUser } from '../store/reducers/currentUserReducer'
+import { useDispatch } from 'react-redux'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -15,6 +17,7 @@ export default function LoginScreen({
     navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
+    const dispatch = useDispatch()
     const spinValue = new Animated.Value(0)
 
     Animated.loop(
@@ -41,8 +44,7 @@ export default function LoginScreen({
                 scopes: ['profile', 'email']
             })
             if (type === 'success') {
-                await AsyncStorage.setItem('LOGGED_IN_USER', JSON.stringify(user))
-                await AsyncStorage.setItem('ACCESS_TOKEN', accessToken)
+                dispatch(setUser({...user, ...{accessToken}}))
                 navigation.navigate('Root')
             } else {
                 alert("not authenticated")
