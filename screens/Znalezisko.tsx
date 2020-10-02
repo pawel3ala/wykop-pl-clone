@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { Button, Linking, StyleSheet, Image, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import { Text, View } from '../components/Themed';
 import ZnaleziskoTopTabNavigator from '../navigation/ZnaleziskoTopTabNavigator'
+import { useDispatch, useStore } from 'react-redux'
+import { addFavouriteLink } from '../store/reducers/usersReducer'
+import { store } from '../store/configureStore';
+import { removeFavouriteLink } from '../store/reducers/usersReducer'
 
 interface IZnaleziskoDetailed {
     id: number,
@@ -21,6 +25,8 @@ const Znalezisko = ({ route }) => {
     const { id = 666 } = route.params
     const description = "Iran otrzymał złoto z Wenezueli w zamian za ładunki paliwa, które Teheran wysłał do tego pogrążonego w kryzysie kraju - poinformował w weekend Yahya Safavi główny dowódca Korpusu Strażników Rewolucji Islamskiej. Kruszec transportowany był do Iranu samolotami aby &quot;zapobiec wypadkowi podczas tranzytu&quot;"
     const [znalezisko, setZnalezisko] = useState<IZnaleziskoDetailed | null>(null)
+    const dispatch = useDispatch()
+    const store = useStore()
 
     const fetchData = () => {
         setZnalezisko({
@@ -50,23 +56,27 @@ const Znalezisko = ({ route }) => {
         <>
             {/* TODO: Set scrollview! */}
             {/* <ScrollView> */}
-                <TouchableWithoutFeedback onPress={handleLinkPress}>
-                    <View style={styles.container}>
-                        <Image style={{ height: '60%', width: '100%', resizeMode: 'stretch' }} source={{ uri: znalezisko.preview }} />
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text>{znalezisko.vote_count}</Text>
-                            <Text style={styles.title}>{znalezisko.title}</Text>
-                        </View>
-                        <Text >{description}</Text>
+            <TouchableWithoutFeedback onPress={handleLinkPress}>
+                <View style={styles.container}>
+                    <Image style={{ height: '60%', width: '100%', resizeMode: 'stretch' }} source={{ uri: znalezisko.preview }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text>{znalezisko.vote_count}</Text>
+                        <Text style={styles.title}>{znalezisko.title}</Text>
                     </View>
-                </TouchableWithoutFeedback>
-                <ZnaleziskoTopTabNavigator
-                    comments_count={znalezisko!.comments_count}
-                    related_count={znalezisko!.related_count}
-                    vote_count={znalezisko!.vote_count}
-                    bury_count={znalezisko!.bury_count}
-                    tags={znalezisko!.tags}
-                />
+                    {/* <Text >{description}</Text> */}
+                    <Button title="Add to favs" onPress={() => (dispatch(addFavouriteLink(znalezisko, store.getState().currentUser.id)))} />
+                    <Button title="rm" onPress={() => (dispatch(removeFavouriteLink(znalezisko, store.getState().currentUser.id)))} />
+                    <Button title="check sotre" onPress={() => console.log(store.getState())} />
+
+                </View>
+            </TouchableWithoutFeedback>
+            <ZnaleziskoTopTabNavigator
+                comments_count={znalezisko!.comments_count}
+                related_count={znalezisko!.related_count}
+                vote_count={znalezisko!.vote_count}
+                bury_count={znalezisko!.bury_count}
+                tags={znalezisko!.tags}
+            />
             {/* </ScrollView> */}
         </>
     )
