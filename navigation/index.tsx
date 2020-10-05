@@ -8,6 +8,7 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import LoginScreen from '../screens/LoginScreen'
+import { useStore } from 'react-redux'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -26,10 +27,16 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const store = useStore()
+  let { currentUser } = store.getState()
+  currentUser = Boolean(currentUser.hasOwnProperty('accessToken'))
+
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
+    <Stack.Navigator
+      initialRouteName={currentUser ? 'Root' : 'Login'}
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
