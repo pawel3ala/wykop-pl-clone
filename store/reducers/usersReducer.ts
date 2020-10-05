@@ -1,9 +1,13 @@
 type Link = {
     id: number
 }
-type Users = {}
+type Users = {
+    id?: {
+        favourites: number[]
+    }
+}
 
-const usersReducerDefaultState: object = {};
+const usersReducerDefaultState: Users = {};
 
 const ADD_FAVOURITE_LINK = 'ADD_FAVOURITE_LINK';
 const REMOVE_FAVOURITE_LINK = 'REMOVE_FAVOURITE_LINK';
@@ -47,7 +51,7 @@ const currentUserReducer = (state = usersReducerDefaultState, action: UsersActio
             }
             else {
                 return {
-                    ...state, 
+                    ...state,
                     [action.userId]: {
                         favourites: [action.link.id]
                     }

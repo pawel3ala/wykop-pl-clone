@@ -1,14 +1,14 @@
 interface User {
-    email: string,
-    familyName: string,
-    givenName: string,
-    id: string,
-    name: string,
-    photoUrl: string,
-    accessToken: string
+    email?: string,
+    familyName?: string,
+    givenName?: string,
+    id?: string,
+    name?: string,
+    photoUrl?: string,
+    accessToken?: string
 }
 
-const currentUserReducerDefaultState: User = {};
+const currentUserReducerDefaultState: User  = {};
 
 const SET_USER = 'SET_USER';
 const CLEAR_USER = 'CLEAR_USER'

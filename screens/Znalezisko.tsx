@@ -5,7 +5,6 @@ import { Text, View } from '../components/Themed';
 import ZnaleziskoTopTabNavigator from '../navigation/ZnaleziskoTopTabNavigator'
 import { useDispatch, useStore } from 'react-redux'
 import { addFavouriteLink } from '../store/reducers/usersReducer'
-import { store } from '../store/configureStore';
 import { removeFavouriteLink } from '../store/reducers/usersReducer'
 
 interface IZnaleziskoDetailed {

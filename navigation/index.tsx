@@ -28,14 +28,15 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   const store = useStore()
-  const loggedUser = store.getState().currentUser
-  console.log(loggedUser ? 'Root' : 'Login')
+  let { currentUser } = store.getState()
+  currentUser = Boolean(currentUser.hasOwnProperty('accessToken'))
 
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-      initialRouteName: {loggedUser} ? 'Root' : 'Login'
-    }}>
+    <Stack.Navigator
+      initialRouteName={currentUser ? 'Root' : 'Login'}
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
